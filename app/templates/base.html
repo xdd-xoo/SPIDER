@@ -1,11 +1,12 @@
 {% extends "bootstrap/base.html" %}
 
-{% block title %}Flasky{% endblock %}
+{% block title %}Spider{% endblock %}
 
 {% block head %}
 {{ super() }}
-<link rel="shortcut icon" href="{{ url_for('static', filename='spider.ico') }}" type="image/x-icon">
-<link rel="icon" href="{{ url_for('static', filename='spider.ico') }}" type="image/x-icon">
+</style>
+<link rel="shortcut icon" href="{{ url_for('static', filename='faviconfavicon.ico') }}" type="image/x-icon">
+<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
 {% endblock %}
 
 {% block navbar %}
@@ -18,13 +19,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ url_for('main.index') }}">Flasky</a>
+            <a class="navbar-brand" href="{{ url_for('main.index') }}">Spider</a>
         </div>
-        <div class="navbar-collapse collapse">
+        <!--div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="{{ url_for('main.index') }}">Home</a></li>
+                <li><a href="{{ url_for('main.index') }}">Go Home</a></li>
             </ul>
-        </div>
+        </div-->
     </div>
 </div>
 {% endblock %}
