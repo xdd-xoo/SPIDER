@@ -4,7 +4,38 @@
 {% block title %}Spider{% endblock %}
 
 {% block page_content %}
-<p><img src="/static/spider.png" width="200" height="200"> <font size="6" face="arial" >Send request to Splunk</font></p>
+<p><img src="/static/spider.png" width="200" height="200"> <font size="6" face="arial" >Onboard sharepoint to Splunk</font></p>
 
-{{ wtf.quick_form(form) }}
+<form method="POST">
+<fieldset>
+<legend><i>Common Settings</i></legend>
+<table>
+<tr><td>{{form.software_product.label}} </td><td>{{form.software_product()}}</td><td> Such as MSM8976LA.1.0</td></tr>
+<tr><td>{{form.requester.label}} </td><td>{{form.requester()}}</td><td> Like "lxin@qti.qualcomm.com"</td></tr>
+</table>
+</fieldset>
+<br/>
+<fieldset>
+<legend><i>Sharepoint Settings</i></legend>
+<table>
+<tr><td>{{form.sharepoint_path.label}}: </td><td>{{form.sharepoint_path()}}</td></tr>
+<tr><td>{{form.sharepoint_server.label}}: </td><td>{{form.sharepoint_server()}}</td></tr>
+</table>
+</fieldset>
+<br/>
+<fieldset>
+<legend><i>Spunk Settings</i></legend>
+<table>
+<tr><td>{{form.milestone_name.label}}: </td><td>{{form.milestone_name()}}</td></tr>
+<tr><td>{{form.test_cycle.label}}: </td><td>{{form.test_cycle()}}</td></tr>
+</table>
+</fieldset>
+<fieldset>
+<legend></legend>
+<table>
+<tr><td>{{form.submit()}}</td><td><a class="btn btn-primary" href="{{ url_for('.index') }}">View Onboard History</a> </td></tr>
+</table>
+</fieldset>
+</form>
+
 {% endblock %}
