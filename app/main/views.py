@@ -9,6 +9,13 @@ from .forms import RequestForm
 @main.route('/spider', methods=['GET', 'POST'])
 def index():
     form = RequestForm()
+
+    if form.is_submitted():
+        if not form.validate():
+             if form.errors:
+                err_msg = ' , '.join(form.errors.keys())
+                flash(err_msg.replace('_',' ').title()+' are required')
+                return render_template('index.html',form=form)
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.requester.data).first()
         if user is None:

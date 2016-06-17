@@ -42,3 +42,12 @@ class OnboardRequest(db.Model):
 
     def __repr__(self):
         return '<Onboard request %r from %r>'%(self.software_product, self.requester)
+
+class SharepointServer(db.Model):
+    __tablename__ = 'sharepoint_server'
+    id = db.Column(db.Integer,primary_key=True)
+    name = db.Column(db.String(128),unique=True,index=True)
+
+    def __repr__(self):
+        return '<Sharepoint server %d>'%self.id
+
