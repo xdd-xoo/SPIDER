@@ -32,13 +32,13 @@ class User(db.Model):
 class OnboardRequest(db.Model):
     __tablename__ = 'onboard_request'
     id = db.Column(db.Integer, primary_key=True)
-    software_product = db.Column(db.String(64), unique=True, index=True)
-    requester = db.Column(db.String(24), unique=True)
+    software_product = db.Column(db.String(64))
     sharepoint_path = db.Column(db.Text())
     milestone_name = db.Column(db.String(64))
     test_cycle = db.Column(db.String(24))
     create_date = db.Column(db.DateTime(), default=datetime.utcnow)
     active = db.Column(db.Boolean, default=False)
+    requester = db.Column(db.String(64))
 
     def __repr__(self):
         return '<Onboard request %r from %r>'%(self.software_product, self.requester)

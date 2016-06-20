@@ -11,8 +11,8 @@
 	<fieldset>
 		<legend><i>Common Settings</i></legend>
 		<table>
-			<tr><td>{{form.software_product.label}} </td><td>{{form.software_product( class="form-control",placeholder="MSM89xx.LA.1.0")}}</td></tr>
-			<tr><td>{{form.requester.label}} </td><td>{{form.requester(class="form-control",placeholder='xxx@qti.qualcomm.com')}}</td></tr>
+			<tr><td><div id="acodeTips" class="tips"><span class="txt-tips">{{form.software_product.label}}</span><div></td><td>{{form.software_product( class="form-control",placeholder="MSM89xx.LA.1.0")}}</td><td><font color='red'>*</font></td></tr>
+			<tr><td>{{form.requester.label}} </td><td>{{form.requester(class="form-control",placeholder='xxx@qti.qualcomm.com')}}</td><td><font color='red'>*</font></td></tr>
 			</table>
 	</fieldset>
 	<br/>
@@ -20,15 +20,15 @@
 		<legend><i>Sharepoint Settings</i></legend>
 		<table>
 			<tr><td>{{form.sharepoint_server.label}}</td><td>{{form.sharepoint_server(class="form-control")}}</td></tr>
-			<tr><td>{{form.sharepoint_path.label}}</td><td>{{form.sharepoint_path(class="form-control")}}</td></tr>
+			<tr><td>{{form.sharepoint_path.label}}</td><td>{{form.sharepoint_path(class="form-control")}}</td><td><font color='red'>*</font></td></tr>
 		</table>
 	</fieldset>
 	<br/>
 	<fieldset>
 		<legend><i>Splunk Settings</i></legend>
 		<table>
-			<tr><td>{{form.milestone_name.label}}</td><td>{{form.milestone_name(class="form-control")}}</td></tr>
-			<tr><td>{{form.test_cycle.label}}</td><td>{{form.test_cycle(class="form-control")}}</td></tr>
+			<tr><td>{{form.milestone_name.label}}</td><td>{{form.milestone_name(class="form-control")}}</td><td><font color='red'>*</font></td></tr>
+			<tr><td>{{form.test_cycle.label}}</td><td>{{form.test_cycle(class="form-control")}}</td><td><font color='red'>*</font></td></tr>
 		</table>
 	</fieldset>
 	<br/>
