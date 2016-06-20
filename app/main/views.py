@@ -1,6 +1,6 @@
 from flask import render_template, session, redirect, url_for, current_app,flash
 from .. import db
-from ..models import User,OnboardRequest
+from ..models import User,OnboardRequest,SharepointServer
 from ..email import send_email
 from . import main
 from .forms import RequestForm
@@ -29,9 +29,10 @@ def index():
             #    send_email(current_app.config['FLASKY_ADMIN'], 'New User',
             #               'mail/new_user', user=user)
         else:
+            server_name = SharepointServer.query.get(form.sharepoint_server.data).name
             onboarding_request = OnboardRequest(software_product = form.software_product.data,\
                                 requester = form.requester.data,\
-                                sharepoint_path = form.sharepoint_path.data,\
+                                sharepoint_path = server_name+form.sharepoint_path.data,\
                                 milestone_name = form.milestone_name.data,\
                                 test_cycle = form.test_cycle.data,\
                             active =1 )
@@ -39,5 +40,11 @@ def index():
             flash("Your request added in background servivce, 10 mins later you can check it on Splunk.Click View Onboard History button to disable or active you request.")
         #    session['known'] = True
         #session['name'] = form.requester.data
-            return render_template('index.html',form =form)
+            return redirect(url_for('.index'))
     return render_template('index.html',form=form)
+
+@main.route('/history', methods=['GET', 'POST'])
+def history():
+    all_request = OnboardRequest.query.all()
+    return render_template('history.html',all_request = all_request)
+

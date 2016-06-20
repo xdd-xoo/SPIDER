@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Spider{% endblock %}
+
+{% block page_content %}
+<p><img src="/static/spider.png" width="200" height="200"> <font size="6" face="arial" >Onboarding Request History View</font></p>
+<ul class="requests">
+{% if all_request %}
+	
+	{% for rqt in all_request %}
+	<li class="posts">
+		<div class="post-date">
+		Create Time: {{ moment(rqt.create_date).fromNow()}}
+		</div>
+		<div class="post-author">
+		Requester : {{rqt.requester}}
+		</div>
+		<div>
+		SP(software product): {{rqt.software_product}}
+		</div>
+		<div clas="post-content"> 
+		SharePoint Path: {{ rqt.sharepoint_path}}
+		</div>
+		<div>
+			
+		</div>
+		<div>
+		{% if rqt.active==True %}
+		Active : <span class="btn btn-success">Active</span>
+		{% else%}
+		Active : <span class="btn btn-warning">Inactive</span>
+		{%endif%}
+		</div>
+	</li>
+	{% endfor %}
+	
+{% endif%}
+</ul>
+
+{% endblock %}
