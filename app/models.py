@@ -33,6 +33,7 @@ class OnboardRequest(db.Model):
     __tablename__ = 'onboard_request'
     id = db.Column(db.Integer, primary_key=True)
     software_product = db.Column(db.String(64))
+    sharepoint_server_id = db.Column(db.Integer, db.ForeignKey('sharepoint_server.id'))
     sharepoint_path = db.Column(db.Text())
     milestone_name = db.Column(db.String(64))
     test_cycle = db.Column(db.String(24))
@@ -47,7 +48,7 @@ class SharepointServer(db.Model):
     __tablename__ = 'sharepoint_server'
     id = db.Column(db.Integer,primary_key=True)
     name = db.Column(db.String(128),unique=True,index=True)
-
+    onboard_request = db.relationship('OnboardRequest', backref='sharepoint_server', lazy='dynamic')
     def __repr__(self):
-        return '<Sharepoint server %d>'%self.id
+        return self.name
 

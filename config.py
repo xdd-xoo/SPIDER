@@ -5,14 +5,14 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'hard to guess string'
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
-    MAIL_SERVER = 'smtp.googlemail.com'
-    MAIL_PORT = 587
+    MAIL_SERVER = 'smtp.163.com'
+    MAIL_PORT = 25
     MAIL_USE_TLS = True
-    MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
-    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
+    MAIL_USERNAME = os.environ.get('MAIL_USERNAME') or "18205680850@163.com"
+    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD') or "159357caonima"
     FLASKY_MAIL_SUBJECT_PREFIX = '[Splunk-auto-data-onboarding]'
-    FLASKY_MAIL_SENDER = 'Flasky Admin <flasky@example.com>'
-    FLASKY_ADMIN = os.environ.get('FLASKY_ADMIN')
+    FLASKY_MAIL_SENDER = 'Spider Admin <18205680850@163.com>'
+    FLASKY_ADMIN = os.environ.get('FLASKY_ADMIN') or "jiwu@qti.qualcomm.com"
 
     @staticmethod
     def init_app(app):

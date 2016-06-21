@@ -29,15 +29,20 @@ def index():
             #    send_email(current_app.config['FLASKY_ADMIN'], 'New User',
             #               'mail/new_user', user=user)
         else:
-            server_name = SharepointServer.query.get(form.sharepoint_server.data).name
             onboarding_request = OnboardRequest(software_product = form.software_product.data,\
                                 requester = form.requester.data,\
-                                sharepoint_path = server_name+form.sharepoint_path.data,\
+                                sharepoint_server_id = form.sharepoint_server.data,\
+                                sharepoint_path = form.sharepoint_path.data,\
                                 milestone_name = form.milestone_name.data,\
                                 test_cycle = form.test_cycle.data,\
                             active =1 )
             db.session.add(onboarding_request)
             flash("Your request added in background servivce, 10 mins later you can check it on Splunk.Click View Onboard History button to disable or active you request.")
+            if onboarding_request.requester:
+                #mail template not support ForeignKey
+                server = SharepointServer.query.get(form.sharepoint_server.data).name
+                send_email(onboarding_request.requester, 'New Onboarding Request',
+                           'mail/new_request', onboarding_request=onboarding_request,server=server)        
         #    session['known'] = True
         #session['name'] = form.requester.data
             return redirect(url_for('.index'))
@@ -48,3 +53,19 @@ def history():
     all_request = OnboardRequest.query.all()
     return render_template('history.html',all_request = all_request)
 
+@main.route('/enable/<int:id>')
+def enable(id):
+    request_obj = OnboardRequest.query.get_or_404(id)
+    print request_obj
+    request_obj.active = 1
+    db.session.add(request_obj)
+    all_request = OnboardRequest.query.all()
+    return redirect(url_for('.history'))
+
+@main.route('/disable/<int:id>')
+def disable(id):
+    request_obj = OnboardRequest.query.get_or_404(id)
+    request_obj.active = 0
+    db.session.add(request_obj)
+    all_request = OnboardRequest.query.all()
+    return redirect(url_for('.history'))

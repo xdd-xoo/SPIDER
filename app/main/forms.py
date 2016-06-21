@@ -23,6 +23,5 @@ class RequestForm(Form):
             raise ValidationError('%s is not in Requester list,please contact with jiwu@qti.qualcomm.com.'%field.data)
 
     def validate_sharepoint_path(self,field):
-        server_name = SharepointServer.query.get(self.sharepoint_server.data).name
-        if OnboardRequest.query.filter_by(sharepoint_path=server_name+field.data).first():
+        if OnboardRequest.query.filter_by(sharepoint_path=field.data).first():
             raise ValidationError('The SharePoint path is exist in database, Please View Onboard History')

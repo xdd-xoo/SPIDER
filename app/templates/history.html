@@ -4,8 +4,8 @@
 {% block title %}Spider{% endblock %}
 
 {% block page_content %}
-<p><img src="/static/spider.png" width="200" height="200"> <font size="6" face="arial" >Onboarding Request History View</font></p>
-<ul class="requests">
+<p><img src="/static/spider.png" width="200" height="200"> <font size="6" face="arial" >Onboarding Request History View</font><a  class="btn btn-info btn-xs" herf="{{ url_for('.index')}}">Back Index</a></p>
+<ul class="posts">
 {% if all_request %}
 	
 	{% for rqt in all_request %}
@@ -19,20 +19,24 @@
 		<div>
 		SP(software product): {{rqt.software_product}}
 		</div>
-		<div clas="post-content"> 
+		<div>
+		SharePoint Server: {{rqt.sharepoint_server}}
+		</div>
+		<div> 
 		SharePoint Path: {{ rqt.sharepoint_path}}
 		</div>
-		<div>
-			
-		</div>
+		<div class="post-author">Splunk Settings:</div>
+			<div>Milestone Name : {{rqt.milestone_name}}</div>
+			<div>Test Cycle : {{rqt.test_cycle}}</div>
 		<div>
 		{% if rqt.active==True %}
-		Active : <span class="btn btn-success">Active</span>
+		Active :<a class="btn btn-success btn-xs" href="{{ url_for('.disable',id=rqt.id) }}">Enable</a>
 		{% else%}
-		Active : <span class="btn btn-warning">Inactive</span>
+		Active : <a class="btn btn-danger btn-xs" href="{{ url_for('.enable',id=rqt.id)}}">Disable</a>
 		{%endif%}
 		</div>
 	</li>
+	<br/>
 	{% endfor %}
 	
 {% endif%}
